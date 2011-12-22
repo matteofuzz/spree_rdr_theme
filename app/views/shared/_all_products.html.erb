@@ -9,9 +9,12 @@
   <% else %>
     <h2>All Products</h2>
     <ul>
-      <% Taxonomy.where(:name => "Categories").first.root.children.each_with_index do |taxon,i| %>
-        <li><%= raw link_to(taxon.name, seo_url(taxon)) %></li>
-      <% end %>
+      <% taxonomy = Taxonomy.where(:name => "Categories").first %>
+      <% if taxonomy %>
+        <% taxonomy.root.children.each_with_index do |taxon,i| %>
+          <li><%= raw link_to(taxon.name, seo_url(taxon)) %></li>
+        <% end %>
+      <% end 
     </ul>
   <% end %>
 </div>
